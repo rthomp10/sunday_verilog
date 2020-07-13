@@ -6,10 +6,11 @@
 `include "..\half_adder\half_adder.v"
 `include "..\full_adder\full_adder.v"
 
-module ripple_carry_64bit( sum, cout, a, b );
+module ripple_carry_64bit( sum, cout, overflow, a, b );
 
 output [63:0] sum;      // Summed output
 output cout;            // Carry flag
+output overflow;        // Overflow detection
 input  [63:0] a;        // A 64bit value to add
 input  [63:0] b;        // Another 64bit value to add
 input  enable;          // Enable
@@ -83,5 +84,10 @@ full_adder FA60( sum[60], carry_wire[60], a[60], b[60], carry_wire[59] );
 full_adder FA61( sum[61], carry_wire[61], a[61], b[61], carry_wire[60] );
 full_adder FA62( sum[62], carry_wire[62], a[62], b[62], carry_wire[61] );
 full_adder FA63( sum[63], cout, a[63], b[63], carry_wire[62] );
+
+//
+// Overflow detection
+//
+xor xor1( overflow, cout, carry_wire[7] );
 
 endmodule

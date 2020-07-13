@@ -6,14 +6,15 @@
 module ripple_carry_64bit_tb();
 wire signed [63:0] sum;
 wire cout;
+wire OF;
 reg signed [63:0] a;
 reg signed [63:0] b;
 reg  cin;
 
-ripple_carry_64bit RC0( sum, cout, a, b );
+ripple_carry_64bit RC0( sum, cout, OF, a, b );
 
 initial begin
-#10 a = -10; b = 20;
+    a = 10; b = -20;
 #10 a =  5599221927511852972; b =-9073391711843153140;
 #10 a =   125843118319673708; b =-7029686126400350234;
 #10 a = -6626586882120967886; b = 3892734086233570300;
@@ -1020,7 +1021,7 @@ end
 
 initial begin 
     $display( "a,b,sum,carry");
-    $monitor( "%d, %d, %d, %b", a, b, sum, cout );
+    $monitor( "%d, %d, %d, %b, %b", a, b, sum, cout, OF );
 end
 
 initial begin
