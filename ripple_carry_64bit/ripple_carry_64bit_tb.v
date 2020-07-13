@@ -4,7 +4,7 @@
 // **********************************
 
 module ripple_carry_64bit_tb();
-wire [63:0] sum;
+wire signed [63:0] sum;
 wire cout;
 reg signed [63:0] a;
 reg signed [63:0] b;
@@ -1020,7 +1020,7 @@ end
 
 initial begin 
     $display( "a,b,sum,carry");
-    $monitor( "%d,%d,%d,%b", a, b, sum, cout );
+    $monitor( "%d, %d, %d, %b", a, b, sum, cout );
 end
 
 initial begin
